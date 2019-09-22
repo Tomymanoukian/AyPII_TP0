@@ -4,15 +4,15 @@
 
 #include "complejo.h"
 
-class vector_t
+class vector
 {
 private:
     complejo* p;
     int tam;
 public:
-    vector_t();
-    vector_t(int largo);
-    ~vector_t();
+    vector();
+    vector(int largo);
+    ~vector();
     int leng();
     void swap(complejo val, int pos);
     void aumentar_tam(int cant);

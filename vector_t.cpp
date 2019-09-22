@@ -1,32 +1,32 @@
 #include <iostream>
     using namespace std;
 
-#include "vector_t.h"
+#include "vector.h"
 
-vector_t::vector_t(){
+vector::vector(){
     
     tam = 10;
     p = new complejo[tam];
 }
 
-vector_t::vector_t(int largo){ //tamaño negativo? falla new?
+vector::vector(int largo){ //tamaño negativo? falla new?
 
     tam = largo;
     p = new complejo[tam];
 }
 
-vector_t::~vector_t(){
+vector::~vector(){
 
     delete[] p;
 }
 
-int vector_t::leng(){
+int vector::leng(){
 
     return tam;
 }
 
 
-void vector_t::swap(complejo val, int pos){ 
+void vector::swap(complejo val, int pos){ 
 
     if(pos < tam)
         p[pos] = val; //sobrecargar []?
@@ -37,7 +37,7 @@ void vector_t::swap(complejo val, int pos){
     }
 }
 
-void vector_t::aumentar_tam(int cant){
+void vector::aumentar_tam(int cant){
 
     if(cant > tam){
 
@@ -53,7 +53,7 @@ void vector_t::aumentar_tam(int cant){
     }
 }
 
-void vector_t::print(){
+void vector::print(){
 
     cout << "{";
 
