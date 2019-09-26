@@ -27,6 +27,7 @@ public:
 	friend complejo const operator+(complejo const &, complejo const &);
 	friend complejo const operator-(complejo const &, complejo const &);
 	friend complejo const operator*(complejo const &, complejo const &);
+	friend complejo const operator*(complejo const &, double);
 	friend complejo const operator/(complejo const &, complejo const &);
 	friend complejo const operator/(complejo const &, double);
 
