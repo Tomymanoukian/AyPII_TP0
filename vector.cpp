@@ -63,3 +63,23 @@ void vector::print(){
 
     cout << "}" << endl;
 }
+
+bool operator==(vector const &x, vector const &y)
+{
+    if(x.tam != y.tam)
+    {
+        return false;
+    }
+
+    //Tendria que usar un sort, pero ya que se usa solo en la prueba
+    //no nos importa ordenarla(aunque tendriamos que implementar un sort para ordenarlo)
+    for(int i = 0; i < x.tam; i++)
+    {
+        if(!(x.p[i] == y.p[i]))
+        {
+            return false;
+        }
+    }
+
+    return true;
+}

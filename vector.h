@@ -13,8 +13,11 @@ public:
     vector();
     vector(int largo);
     ~vector();
+
     int leng();
     void swap(complejo val, int pos);
     void aumentar_tam(int cant);
     void print();
+
+    friend bool operator==(vector const &, vector const &);
 };
