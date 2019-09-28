@@ -6,6 +6,8 @@
 
 #endif
 
+#include <iostream>
+    using namespace std;
 #include "complejo.h"
 
 
@@ -25,6 +27,7 @@ public:
     complejo operator[](int pos);
     bool operator==(vector_t &vec);
     friend istream & operator>>(istream &is, vector_t &v);
+    friend ostream & operator<<(ostream &os, vector_t &v);
     void swap(complejo val, int pos);
     void aumentar_tam(int cant);
     void print();

@@ -129,7 +129,7 @@ operator*(complejo const &x, complejo const &y)
 complejo const
 operator*(complejo const &x, double k)
 {
-	complejo r(x.re * k, x.im * k);
+	complejo r(x.re() * k, x.im() * k);
 	return r;
 }
 
