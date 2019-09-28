@@ -15,8 +15,8 @@ class vector_t
 {
 private:
     complejo* p;
-    int tam;
-    int capacidad;
+    int tam = 0;
+    int capacidad = 0;
 public:
     vector_t();
     vector_t(int largo);

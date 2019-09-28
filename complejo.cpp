@@ -189,7 +189,8 @@ operator>>(istream &is, complejo &c)
 			good = true;
 		else
 			bad = true;
-	} else if (is.good()) {
+	}
+	else if (is.good()) {
 		is.putback(ch);
 		if (is >> re)
 			good = true;

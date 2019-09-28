@@ -5,14 +5,15 @@
 
 vector_t::vector_t(){
     
-    tam = VECTOR_DEFAULT_CAPACIDAD_INICIAL;
-    p = new complejo[tam];
+    capacidad = VECTOR_DEFAULT_CAPACIDAD_INICIAL;
+    
+    p = new complejo[capacidad];
 }
 
 vector_t::vector_t(int largo){ //tamaño negativo? falla new?
 
-    tam = largo;
-    p = new complejo[tam];
+    capacidad = largo;
+    p = new complejo[capacidad];
 }
 
 vector_t::~vector_t(){
@@ -25,14 +26,18 @@ int vector_t::leng(){
     return tam;
 }
 
-complejo vector_t::valor(int pos){
+complejo vector_t::valor(int pos){ //debe fallar si la posicion no es valida
 
     return p[pos];
 }
 
 vector_t vector_t::operator+(vector_t &a){ //hay que pasarlo por referencia o por copia?
 
-    this->aumentar_tam(tam + a.leng());
+    int longitud = tam + a.leng();
+
+    if(capacidad < longitud){
+        this->aumentar_tam(longitud);
+    }
 
     for (int i = 0; i < a.leng(); ++i)
     {
@@ -73,11 +78,14 @@ istream & operator>>(istream &is, vector_t &v){ //lee un vector_t de complejos s
 
         v.swap(c, i);
 
-        if(!(is >> a))
+        if(!(is >> a) || a == '\n'){
+            //cout << "falla 1" << endl; //BORRAR
             break;
+        }
 
         if(a != ' '){
             is.clear(ios::badbit);
+            //cout << "falla 2: " << a << endl; //BORRAR
             break;
         }
     }
@@ -104,14 +112,16 @@ void vector_t::swap(complejo val, int pos){
         aumentar_tam(VECTOR_DEFAULT_STEP);
         p[pos] = val;
     }
+
+    ++tam;
 }
 
 void vector_t::aumentar_tam(int cant){
 
-    if(cant > tam){
+    if(cant > capacidad){
 
         complejo* aux = new complejo[cant];
-        tam = cant;
+        capacidad = cant;
 
         for (int i = 0; i < cant; i++){
             aux[i] = p[i];
