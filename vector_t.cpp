@@ -76,18 +76,21 @@ istream & operator>>(istream &is, vector_t &v){ //lee un vector_t de complejos s
 
     for(int i = 0; is >> c; i++){
 
+        //cout << "complex" << c << "\n"; //BORRAR
         v.swap(c, i);
 
         if(!(is >> a) || a == '\n'){
-            //cout << "falla 1" << endl; //BORRAR
+            //cout << "vector_t 1 ->" << a << "<-" <<"\n"; //BORRAR
             break;
         }
 
-        if(a != ' '){
+        if(a != '('){
             is.clear(ios::badbit);
-            //cout << "falla 2: " << a << endl; //BORRAR
+            //cout << "vector_t 2 ->" << a << "<-" << "\n"; //BORRAR
             break;
         }
+        //cout << "char:" << a << "\n"; //BORRAR
+        is.putback(a);
     }
 
     return is;

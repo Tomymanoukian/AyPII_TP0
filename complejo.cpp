@@ -185,13 +185,17 @@ operator>>(istream &is, complejo &c)
 		    && ch == ','
 		    && is >> im
 		    && is >> ch
-		    && ch == ')')
+		    && ch == ')'){
 			good = true;
+			//is.putback(ch);
+			//cout << "complejo 1 ->" << ch << "<-" << "\n"; //BORRAR
+		}
 		else
 			bad = true;
 	}
 	else if (is.good()) {
 		is.putback(ch);
+		//cout << "complejo 2 ->" << ch << "<-" << "\n"; //BORRAR
 		if (is >> re)
 			good = true;
 		else
@@ -200,8 +204,10 @@ operator>>(istream &is, complejo &c)
 
 	if (good)
 		c.re_ = re, c.im_ = im;
-	if (bad)
+	if (bad){
 		is.clear(ios::badbit);
+		//cout << "falla complejo \n"; //BORRAR
+	}
 
 	return is;
 }
