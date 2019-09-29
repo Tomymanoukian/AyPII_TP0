@@ -16,6 +16,9 @@ public:
 	complejo const &operator-=(complejo const &);
 	~complejo();
 
+	void set_re(double x);
+	void set_im(double x);
+	
 	double re() const;
 	double im() const;
 	double abs() const;
