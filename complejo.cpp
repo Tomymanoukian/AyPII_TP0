@@ -61,6 +61,16 @@ complejo::~complejo()
 {
 }
 
+void complejo::set_re(double x)
+{
+	re_=x;
+}
+
+void complejo::set_im(double x)
+{
+	im_=x;
+}
+
 double
 complejo::re() const
 {
