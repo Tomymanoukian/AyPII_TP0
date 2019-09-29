@@ -4,8 +4,6 @@
 #define VECTOR_DEFAULT_CAPACIDAD_INICIAL 10;
 #define VECTOR_DEFAULT_STEP 5
 
-#endif
-
 #include <iostream>
     using namespace std;
 #include "complejo.h"
@@ -32,3 +30,5 @@ public:
     void aumentar_tam(int cant);
     void print();
 };
+
+#endif
