@@ -1,7 +1,8 @@
 #include <iostream>
 #include <sstream> 
 #include <string>
-    using namespace std;
+    
+using namespace std;
 
 #include "vector_t.h"
 
@@ -28,9 +29,59 @@ int vector_t::leng(){
     return tam;
 }
 
+void vector_t::aumentar_cap(int cant){
+
+    complejo* aux = new complejo[capacidad + cant];
+    capacidad = cant;
+
+    for (int i = 0; i < cant; i++){
+        aux[i] = p[i];
+    }
+
+    delete[] p;
+    p = aux;
+}
+
+
 complejo vector_t::valor(int pos){ //debe fallar si la posicion no es valida
 
     return p[pos];
+}
+
+void vector_t::append(complejo &valor)
+{
+    if(tam == capacidad)
+    {
+        aumentar_cap(VECTOR_DEFAULT_STEP);
+    }
+
+    p[tam] = valor;
+    tam++;
+}
+
+
+
+void vector_t::swap(complejo val, int pos){ 
+
+    if(pos < tam)
+        p[pos - 1] = val;
+
+    else
+    {
+        throw "Posición fuera de rango"
+    }
+}
+
+
+void vector_t::print(){ // esta funcion es solo para hacer pruebas. borrar antes de la entrega
+
+    cout << "{";
+
+    for(int i = 0; i < tam; i++){
+        cout << p[i] << ", ";
+    }
+
+    cout << "}" << endl;
 }
 
 vector_t vector_t::operator+(vector_t &a){ //hay que pasarlo por referencia o por copia?
@@ -38,7 +89,7 @@ vector_t vector_t::operator+(vector_t &a){ //hay que pasarlo por referencia o po
     int longitud = tam + a.leng();
 
     if(capacidad < longitud){
-        this->aumentar_tam(longitud);
+        this->aumentar_cap(longitud);
     }
 
     for (int i = 0; i < a.leng(); ++i)
@@ -101,44 +152,4 @@ ostream & operator<<(ostream &os, vector_t &v){ //probar si funciona
     }
 
     return os;
-}
-
-void vector_t::swap(complejo val, int pos){ 
-
-    if(pos < capacidad)
-        p[pos] = val;
-
-    else{
-        aumentar_tam(VECTOR_DEFAULT_STEP);
-        p[pos] = val;
-    }
-
-    ++tam;
-}
-
-void vector_t::aumentar_tam(int cant){
-
-    if(cant > capacidad){
-
-        complejo* aux = new complejo[cant];
-        capacidad = cant;
-
-        for (int i = 0; i < cant; i++){
-            aux[i] = p[i];
-        }
-
-        delete[] p;
-        p = aux;
-    }
-}
-
-void vector_t::print(){ // esta funcion es solo para hacer pruebas. borrar antes de la entrega
-
-    cout << "{";
-
-    for(int i = 0; i < tam; i++){
-        cout << p[i] << ", ";
-    }
-
-    cout << "}" << endl;
 }
