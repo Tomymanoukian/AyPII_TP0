@@ -138,14 +138,14 @@ istream & operator>>(istream &is, vector_t &v){ //lee un vector_t de complejos s
     istringstream stream_line(line);
 
     while(stream_line >> c){
-
-        if(stream_line.bad() || stream_line.fail()){
-
-            is.clear(ios::badbit);
-            return is;
-        }
-        
         v.append(c);
+    }
+
+    //En caso de que haya error, cambia estado de is
+    if(stream_line.bad())
+    {
+        is.clear(ios::badbit);
+        return is;
     }
 
     return is;

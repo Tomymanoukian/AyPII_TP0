@@ -46,11 +46,21 @@ int main()
         line_readed = line_readed.substr(0, line_readed.find('='));
         istringstream line_buffer(line_readed);
 
+        //Imprimo la primer parte
+        test_file_out << line_readed << " = ";
+        
+
         //Paso del stringstream al vector_t
         line_buffer >> test_subject;
+
+        if(line_buffer.bad())
+        {
+            test_file_out << "ERROR" << endl;
+            continue;
+        }
         
         //Imprime la primer parte
-        test_file_out << line_readed << " = " << test_subject << endl;
+        test_file_out << test_subject << endl;
 
         test_subject.clean(); //Limpio el vector
         line_readed.clear(); //Limpio el string
