@@ -72,6 +72,13 @@ void vector_t::swap(complejo &val, int pos){
     }
 }
 
+void vector_t::clean()
+{
+    tam = 0;
+    capacidad = VECTOR_DEFAULT_CAPACIDAD_INICIAL;
+    delete [] p;
+    p = new complejo[capacidad];
+}
 
 void vector_t::print(){ // esta funcion es solo para hacer pruebas. borrar antes de la entrega
 
@@ -146,7 +153,7 @@ istream & operator>>(istream &is, vector_t &v){ //lee un vector_t de complejos s
 
 ostream & operator<<(ostream &os, vector_t &v){ //probar si funciona
 
-    for (int i = 0; i < v.leng(); ++i)
+    for (int i = 0; i < v.leng(); i++)
     {
         os << v.valor(i) << " ";
     }
