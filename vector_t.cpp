@@ -1,4 +1,6 @@
 #include <iostream>
+#include <sstream> 
+#include <string>
     using namespace std;
 
 #include "vector_t.h"
@@ -72,25 +74,20 @@ bool vector_t::operator==(vector_t &vec){ //hay que pasarlo por referencia o por
 istream & operator>>(istream &is, vector_t &v){ //lee un vector_t de complejos separados por espacios del archivo is
 
     complejo c;
-    char a;
+    string line;
 
-    for(int i = 0; is >> c; i++){
+    getline(is, line);
+    istringstream stream_line(line);
 
-        //cout << "complex" << c << "\n"; //BORRAR
-        v.swap(c, i);
+    while(stream_line >> c){
 
-        if(!(is >> a) || a == '\n'){
-            //cout << "vector_t 1 ->" << a << "<-" <<"\n"; //BORRAR
-            break;
-        }
+        if(stream_line.bad() || stream_line.fail()){
 
-        if(a != '('){
             is.clear(ios::badbit);
-            //cout << "vector_t 2 ->" << a << "<-" << "\n"; //BORRAR
-            break;
+            return is;
         }
-        //cout << "char:" << a << "\n"; //BORRAR
-        is.putback(a);
+        
+        v.append(c);
     }
 
     return is;
