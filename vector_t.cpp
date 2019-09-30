@@ -61,14 +61,14 @@ void vector_t::append(complejo &valor)
 
 
 
-void vector_t::swap(complejo val, int pos){ 
+void vector_t::swap(complejo &val, int pos){ 
 
     if(pos < tam)
         p[pos - 1] = val;
 
     else
     {
-        throw "Posición fuera de rango"
+        throw "Posición fuera de rango";
     }
 }
 

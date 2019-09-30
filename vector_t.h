@@ -16,7 +16,7 @@ private:
     int tam = 0;
     int capacidad = 0;
 
-    void aumentar_cap(int cant);
+    void aumentar_cap(int cant); 
 
 public:
     vector_t();
@@ -24,10 +24,10 @@ public:
     ~vector_t();
     
 
-    int leng();
-    complejo valor(int pos);
-    void append(complejo &valor);
-    void swap(complejo val, int pos);
+    int leng(); //Devuelve el tamaño del vector
+    complejo valor(int pos); //Devuelve el complejo en la posiscion fijada
+    void append(complejo &valor); //Agrega el complejo al final del vector
+    void swap(complejo &val, int pos); //Cambia el valor del complejo en la posición seleccionada
     
     void print();
 
