@@ -61,15 +61,16 @@ void vector_t::append(complejo &valor)
 
 
 
-void vector_t::swap(complejo &val, int pos){ 
+bool vector_t::swap(complejo &val, int pos){ 
 
-    if(pos < tam)
+    if(pos < tam){
+
         p[pos - 1] = val;
+        return true;
+    }
 
     else
-    {
-        throw "Posición fuera de rango";
-    }
+        return false;
 }
 
 void vector_t::clean()
@@ -151,7 +152,7 @@ istream & operator>>(istream &is, vector_t &v){ //lee un vector_t de complejos s
     return is;
 }
 
-ostream & operator<<(ostream &os, vector_t &v){ //probar si funciona
+ostream & operator<<(ostream &os, vector_t &v){
 
     for (int i = 0; i < v.leng(); i++)
     {

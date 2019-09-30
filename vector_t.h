@@ -27,7 +27,7 @@ public:
     int leng(); //Devuelve el tamaño del vector
     complejo valor(int pos); //Devuelve el complejo en la posiscion fijada
     void append(complejo &valor); //Agrega el complejo al final del vector
-    void swap(complejo &val, int pos); //Cambia el valor del complejo en la posición seleccionada
+    bool swap(complejo &val, int pos); //Cambia el valor del complejo en la posición seleccionada
     void clean(); //Limpia el vector y lo devuelve a la capacidad default;
     
     void print();
