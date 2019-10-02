@@ -33,7 +33,7 @@ int main (int argc, char * const argv[])
 	vector_t prueba{};
 	vector_t salida{};
 
-	cmdline cmdl(options);	// Objeto con parametro tipo option_t (struct) declarado globalmente. Ver línea 51 main.cc
+	cmdline cmdl(options);	// Objeto con parametro tipo option_t (struct) declarado globalmente. Ver línea 51 cmdline.h
 	cmdl.parse(argc, argv); // Metodo de parseo de la clase cmdline
 
 	*iss>>prueba;
