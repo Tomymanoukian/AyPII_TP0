@@ -14,7 +14,7 @@ class vector_t
 private:
     complejo* p;
     int tam = 0;
-    int capacidad = 0;
+    int capacidad = 0; //usar size_t
 
     void aumentar_cap(int cant); 
 
@@ -31,6 +31,8 @@ public:
     void clean(); //Limpia el vector y lo devuelve a la capacidad default;
     
     void print();
+
+    int cap(); //BORRAR
 
     vector_t operator+(vector_t &a);
     complejo operator[](int pos);

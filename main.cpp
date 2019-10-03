@@ -30,21 +30,42 @@ type_method method;
 
 int main (int argc, char * const argv[])
 {
-	vector_t prueba{};
-	vector_t salida{};
+	vector_t vec_in; //PROBLEMAS AL ELIMINAR ESTE VECTOR
+	vector_t vec_out;
 
-	cmdline cmdl(options);	// Objeto con parametro tipo option_t (struct) declarado globalmente. Ver línea 51 cmdline.h
+	cmdline cmdl(options);
 	cmdl.parse(argc, argv); // Metodo de parseo de la clase cmdline
 
-	*iss>>prueba;
+	while(!iss->eof()){
 
-	if (method==METHOD_DFT) {
-		salida=dft(prueba);
-	} else if (method==METHOD_IDFT) {
-		salida=idft(prueba);
+		if(iss->eof()){
+			cout << "salio por eof" << endl;
+			break;
+		}
+
+		if(!(*iss >> vec_in)){
+			cout << "salio por error" << endl;
+			break;
+		}
+
+		if (method == METHOD_DFT) {
+			vec_out = dft(vec_in);
+		}
+		else if (method == METHOD_IDFT) {
+			vec_out = idft(vec_in);
+		}
+
+		*oss << vec_out << endl;
 	}
+	cout << "afuera" << endl;
+	cout << "cant vec in: " << vec_in.cap() << endl;
+	cout << "cant vec out: " << vec_out.cap() << endl;
 
-	*oss<<salida<<endl;
+	if(ifs.is_open())
+		ifs.close();
+
+	if(ofs.is_open())
+		ofs.close();
 
 	return 0;
 }
