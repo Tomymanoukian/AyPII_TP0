@@ -21,7 +21,7 @@ vector_t::vector_t(int largo){ //tamaño negativo? falla new?
 
 vector_t::~vector_t(){
 
-    cout << "entro a borrar un vector" << endl; //BORRAR
+    //cout << "entro a borrar un vector" << endl; //BORRAR
     delete[] p;
     //cout << "salio de borrar un vector" << endl; //BORRAR
 }

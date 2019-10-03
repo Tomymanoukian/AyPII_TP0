@@ -6,22 +6,22 @@ using namespace std;
 
 complejo::complejo() : re_(0), im_(0)
 {
-	cout << "*"; //BORRAR
+	//cout << "*"; //BORRAR
 }
 
 complejo::complejo(double r) : re_(r), im_(0)
 {
-	cout << "*"; //BORRAR
+	//cout << "*"; //BORRAR
 }
 
 complejo::complejo(double r, double i) : re_(r), im_(i)
 {
-	cout << "*"; //BORRAR
+	//cout << "*"; //BORRAR
 }
 
 complejo::complejo(complejo const &c) : re_(c.re_), im_(c.im_)
 {
-	cout << "*"; //BORRAR
+	//cout << "*"; //BORRAR
 }
 
 complejo const &
@@ -63,7 +63,7 @@ complejo::operator-=(complejo const &c)
 
 complejo::~complejo()
 {
-	cout << "."; //BORRAR
+	//cout << "."; //BORRAR
 }
 
 void complejo::set_re(double x)

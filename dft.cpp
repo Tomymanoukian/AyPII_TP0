@@ -3,7 +3,7 @@
 vector_t dft (vector_t vector_in)
 {
 	int k, n, largo_in=vector_in.leng();
-	vector_t vector_out(largo_in);
+	vector_t vector_out(largo_in); //REVISAR ESTE CONSTRUCTOR
 	complejo aux{};
 
 	for (k=0; k<largo_in; k++)
