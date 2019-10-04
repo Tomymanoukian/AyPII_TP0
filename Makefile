@@ -22,6 +22,7 @@ main.o : main.cpp cmdline.h complejo.h vector_t.h dft.h
 #prueba para borrar:
 prueba: programa $(objects_prog)
 	./programa -i "in_file_prueba.txt"
+	@rm *.o programa
 
 
 test-dft: $(objects_dft)

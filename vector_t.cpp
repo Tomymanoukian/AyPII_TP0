@@ -19,6 +19,18 @@ vector_t::vector_t(int largo){ //tamaño negativo? falla new?
     p = new complejo[capacidad];
 }
 
+vector_t::vector_t(vector_t & copia)
+{
+    tam = copia.tam;
+    capacidad = copia.capacidad;
+
+    p = new complejo[capacidad];
+    for(int i = 0; i < capacidad; i++)
+    {
+        p[i] = copia.p[i];
+    }
+}
+
 vector_t::~vector_t(){
 
     //cout << "entro a borrar un vector" << endl; //BORRAR

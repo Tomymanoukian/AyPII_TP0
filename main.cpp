@@ -31,7 +31,7 @@ type_method method;
 int main (int argc, char * const argv[])
 {
 	vector_t vec_in; 
-	vector_t vec_out;//PROBLEMAS AL ELIMINAR ESTE VECTOR CUANDO SE CARGA DOS VECES
+	vector_t * vec_out;//PROBLEMAS AL ELIMINAR ESTE VECTOR CUANDO SE CARGA DOS VECES
 
 	cmdline cmdl(options);
 	cmdl.parse(argc, argv); // Metodo de parseo de la clase cmdline
@@ -62,14 +62,12 @@ int main (int argc, char * const argv[])
 		cout << "cant vec in: " << vec_in.cap() << endl;
 		vec_in.clean();						 // SI COMENTO ESTO NO FALLA
 		cout << "-------------------------" << endl;
-		vec_out.print(); //BORRAR
-		cout << "cant vec out: " << vec_out.cap() << endl;
-		vec_out.clean();					//PERO SI NO ESTA COMENTADA LA LINEA ANTERIOR FALLA ACÁ
+		vec_out->print(); //BORRAR
+		cout << "cant vec out: " << vec_out->cap() << endl;
+		vec_out->clean();					//PERO SI NO ESTA COMENTADA LA LINEA ANTERIOR FALLA ACï¿½
 		cout << "-------------------------" << endl;
 	}
-	cout << "afuera" << endl;
-	cout << "cant vec in: " << vec_in.cap() << endl;
-	cout << "cant vec out: " << vec_out.cap() << endl;
+	
 
 	if(ifs.is_open())
 		ifs.close();

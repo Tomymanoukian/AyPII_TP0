@@ -1,6 +1,6 @@
 #include "dft.h"
 
-vector_t dft (vector_t vector_in)
+vector_t * dft (vector_t & vector_in)
 {
 	int k, n, largo_in=vector_in.leng();
 	vector_t vector_out(largo_in); //REVISAR ESTE CONSTRUCTOR
@@ -16,10 +16,10 @@ vector_t dft (vector_t vector_in)
 		vector_out.append(aux);
 	}
 
-	return vector_out;
+	return new vector_t(vector_out);
 }
 
-vector_t idft (vector_t vector_in)
+vector_t * idft (vector_t & vector_in)
 {
 	int n, k, largo_in=vector_in.leng();
 	vector_t vector_out(largo_in);
@@ -37,5 +37,5 @@ vector_t idft (vector_t vector_in)
 		vector_out.append(aux);
 	}
 
-	return vector_out;
+	return new vector_t(vector_out);
 }

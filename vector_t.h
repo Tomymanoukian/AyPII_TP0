@@ -21,6 +21,7 @@ private:
 public:
     vector_t();
     vector_t(int largo);
+    vector_t(vector_t & copia);
     ~vector_t();
     
 
