@@ -31,10 +31,17 @@ type_method method;
 int main (int argc, char * const argv[])
 {
 	vector_t vec_in; 
-	vector_t * vec_out;//PROBLEMAS AL ELIMINAR ESTE VECTOR CUANDO SE CARGA DOS VECES
+	vector_t * vec_out;
+	vector_t * (*funcionFourier)(vector_t &);
 
 	cmdline cmdl(options);
 	cmdl.parse(argc, argv); // Metodo de parseo de la clase cmdline
+
+	//Selecciona cual es el metodo a usar
+	if(method == METHOD_DFT)
+		funcionFourier = dft;
+	else
+		funcionFourier = idft;
 
 	while(!iss->eof()){
 
@@ -48,15 +55,10 @@ int main (int argc, char * const argv[])
 			break;
 		}
 
-		if (method == METHOD_DFT) { //verifica demasiadas veces el metodo
-			vec_out = dft(vec_in);
-		}
-		else if (method == METHOD_IDFT) {
-			vec_out = idft(vec_in);
-		}
+		vec_out = funcionFourier(vec_in);
 
 		*oss << *vec_out << endl;
-
+		delete vec_out; //Libero la memoria pedida en DFT
 	}
 	
 

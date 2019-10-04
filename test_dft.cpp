@@ -19,6 +19,7 @@ int main()
     vector_t * (*functionToTest)(vector_t &) = dft;
 
     vector_t test_subject;
+    vector_t * output_of_ft;
 
     test_file_in.open(TEST_DFT_FILE_IN);
     //Compruebo si hubo error al abrir el archivo
@@ -69,8 +70,10 @@ int main()
         }
         
         //Imprime imprimo el resultado si funciona
-        test_file_out << *functionToTest(test_subject) << endl;
+        output_of_ft = functionToTest(test_subject);
+        test_file_out <<  *output_of_ft << endl;
 
+        delete output_of_ft;  //Libero la memoria llamada desde dft
         test_subject.clean(); //Limpio el vector
         line_readed.clear(); //Limpio el string
     }
