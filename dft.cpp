@@ -3,7 +3,7 @@
 vector_t * dft (vector_t & vector_in)
 {
 	int k, n, largo_in=vector_in.leng();
-	vector_t * vector_out = new vector_t(largo_in); //REVISAR ESTE CONSTRUCTOR
+	vector_t * vector_out = new vector_t(largo_in);
 	complejo aux{};
 
 	for (k=0; k<largo_in; k++)
@@ -22,7 +22,7 @@ vector_t * dft (vector_t & vector_in)
 vector_t * idft (vector_t & vector_in)
 {
 	int n, k, largo_in=vector_in.leng();
-	vector_t vector_out(largo_in);
+	vector_t * vector_out = new vector_t(largo_in);
 	complejo aux{};
 
 	for (n=0; n<largo_in; n++)
@@ -34,8 +34,8 @@ vector_t * idft (vector_t & vector_in)
 		}
 		aux.set_re(aux.re()/largo_in);
 		aux.set_im(aux.im()/largo_in);
-		vector_out.append(aux);
+		vector_out->append(aux);
 	}
 
-	return new vector_t(vector_out);
+	return vector_out;
 }
