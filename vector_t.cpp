@@ -25,7 +25,7 @@ vector_t::vector_t(vector_t & copia)
     capacidad = copia.capacidad;
 
     p = new complejo[capacidad];
-    for(int i = 0; i < capacidad; i++)
+    for(size_t i = 0; i < capacidad; i++)
     {
         p[i] = copia.p[i];
     }
@@ -48,7 +48,7 @@ void vector_t::aumentar_cap(size_t cant){
     complejo* aux = new complejo[capacidad + cant];
     capacidad = cant;
 
-    for (int i = 0; i < cant; i++){
+    for (size_t i = 0; i < capacidad; i++){
         aux[i] = p[i];
     }
 
@@ -77,7 +77,7 @@ void vector_t::append(complejo &valor)
 
 bool vector_t::swap(complejo &val, int pos){ 
 
-    if(pos < tam){
+    if(pos >= 0 && (size_t)pos < tam){
 
         p[pos - 1] = val;
         return true;
@@ -99,7 +99,7 @@ void vector_t::print() const{ // esta funcion es solo para hacer pruebas. borrar
 
     cout << "{";
 
-    for(int i = 0; i < tam; i++){
+    for(size_t i = 0; i < (size_t)tam; i++){
         cout << p[i] << ", ";
     }
 
@@ -108,13 +108,13 @@ void vector_t::print() const{ // esta funcion es solo para hacer pruebas. borrar
 
 vector_t vector_t::operator+(const vector_t &a){ //hay que pasarlo por referencia o por copia?
 
-    int longitud = tam + a.leng();
+    size_t longitud = tam + a.leng();
 
     if(capacidad < longitud){
         this->aumentar_cap(longitud);
     }
 
-    for (int i = 0; i < a.leng(); ++i)
+    for (size_t i = 0; i < (size_t)a.leng(); ++i)
     {
         p[this->leng() + i] = a.p[i]; 
     }
@@ -133,7 +133,7 @@ bool vector_t::operator==(const vector_t &vec){
         return false;
     }
 
-    for(int i = 0; i < tam;i++)
+    for(size_t i = 0; i < tam;i++)
     {
         if(!(p[i] == vec.p[i])) //agregar != a complejo
         {
@@ -168,7 +168,7 @@ istream & operator>>(istream &is, vector_t &v){ //lee un vector_t de complejos s
 
 ostream & operator<<(ostream &os, vector_t &v){
 
-    for (int i = 0; i < v.leng(); i++)
+    for (size_t i = 0; i < (size_t)v.leng(); i++)
     {
         os << v.valor(i) << " ";
     }

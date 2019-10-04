@@ -9,12 +9,14 @@ using namespace std;
 
 #define TEST_DFT_FILE_IN "test_dft_in.txt"
 #define TEST_DFT_FILE_OUT "test_dft_out.txt"
+#define TEST_DFT_CHANGE_TO_IDFT "IDFT"
 
 int main()
 {
     ifstream test_file_in;
     ofstream test_file_out;
     string line_readed;
+    vector_t * (*functionToTest)(vector_t &) = dft;
 
     vector_t test_subject;
 
@@ -40,6 +42,14 @@ int main()
 
         if(line_readed.empty())
         {
+            test_file_out << endl;
+            continue;
+        }
+        
+        else if(line_readed == TEST_DFT_CHANGE_TO_IDFT) //Cambia la función a probar
+        {
+            test_file_out << TEST_DFT_CHANGE_TO_IDFT << endl;
+            functionToTest = idft;
             continue;
         }
         
@@ -49,24 +59,22 @@ int main()
         //Imprimo la primer parte
         test_file_out << line_readed << " = ";
         
-
         //Paso del stringstream al vector_t
         line_buffer >> test_subject;
 
         if(line_buffer.bad())
         {
-            test_file_out << "ERROR" << endl;
+            test_file_out << "ERROR" << endl; //Imprimo el resultado ERROR si no se pudo leer
             continue;
         }
         
-        //Imprime la primer parte
-        test_file_out << test_subject << endl;
+        //Imprime imprimo el resultado si funciona
+        test_file_out << *functionToTest(test_subject) << endl;
 
         test_subject.clean(); //Limpio el vector
         line_readed.clear(); //Limpio el string
     }
     
-
     test_file_in.close();
     test_file_out.close();
 }
