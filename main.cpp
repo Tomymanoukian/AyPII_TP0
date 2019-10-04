@@ -57,15 +57,6 @@ int main (int argc, char * const argv[])
 
 		*oss << vec_out << endl;
 
-		cout << "-------------------------" << endl;
-		vec_in.print(); //BORRAR
-		cout << "cant vec in: " << vec_in.cap() << endl;
-		vec_in.clean();						 // SI COMENTO ESTO NO FALLA
-		cout << "-------------------------" << endl;
-		vec_out->print(); //BORRAR
-		cout << "cant vec out: " << vec_out->cap() << endl;
-		vec_out->clean();					//PERO SI NO ESTA COMENTADA LA LINEA ANTERIOR FALLA AC�
-		cout << "-------------------------" << endl;
 	}
 	
 
