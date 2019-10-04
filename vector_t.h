@@ -13,31 +13,29 @@ class vector_t
 {
 private:
     complejo* p;
-    int tam = 0;
-    int capacidad = 0; //usar size_t
+    size_t tam = 0;
+    size_t capacidad = 0;
 
-    void aumentar_cap(int cant); 
+    void aumentar_cap(size_t cant); 
 
 public:
     vector_t();
-    vector_t(int largo);
+    vector_t(size_t largo);
     vector_t(vector_t & copia);
     ~vector_t();
     
 
-    int leng(); //Devuelve el tamaño del vector
-    complejo valor(int pos); //Devuelve el complejo en la posiscion fijada
+    int leng() const; //Devuelve el tamaño del vector
+    complejo valor(int pos) const; //Devuelve el complejo en la posiscion fijada
     void append(complejo &valor); //Agrega el complejo al final del vector
     bool swap(complejo &val, int pos); //Cambia el valor del complejo en la posición seleccionada
     void clean(); //Limpia el vector y lo devuelve a la capacidad default;
     
-    void print();
+    void print() const;
 
-    int cap(); //BORRAR
-
-    vector_t operator+(vector_t &a);
+    vector_t operator+(const vector_t &a);
     complejo operator[](int pos);
-    bool operator==(vector_t &vec);
+    bool operator==(const vector_t &vec);
 
     friend istream & operator>>(istream &is, vector_t &v);
     friend ostream & operator<<(ostream &os, vector_t &v);

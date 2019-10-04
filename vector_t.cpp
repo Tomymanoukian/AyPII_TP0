@@ -13,7 +13,7 @@ vector_t::vector_t(){
     p = new complejo[capacidad];
 }
 
-vector_t::vector_t(int largo){ //tamaño negativo? falla new?
+vector_t::vector_t(size_t largo){ 
 
     capacidad = largo;
     p = new complejo[capacidad];
@@ -38,16 +38,12 @@ vector_t::~vector_t(){
     //cout << "salio de borrar un vector" << endl; //BORRAR
 }
 
-int vector_t::leng(){
+int vector_t::leng() const{
 
     return tam;
 }
 
-int vector_t::cap(){ //BORRAR
-    return capacidad;
-}
-
-void vector_t::aumentar_cap(int cant){
+void vector_t::aumentar_cap(size_t cant){
 
     complejo* aux = new complejo[capacidad + cant];
     capacidad = cant;
@@ -61,7 +57,7 @@ void vector_t::aumentar_cap(int cant){
 }
 
 
-complejo vector_t::valor(int pos){ //debe fallar si la posicion no es valida
+complejo vector_t::valor(int pos) const { //debe fallar si la posicion no es valida
 
     return p[pos];
 }
@@ -99,7 +95,7 @@ void vector_t::clean()
     p = new complejo[capacidad];
 }
 
-void vector_t::print(){ // esta funcion es solo para hacer pruebas. borrar antes de la entrega
+void vector_t::print() const{ // esta funcion es solo para hacer pruebas. borrar antes de la entrega
 
     cout << "{";
 
@@ -110,7 +106,7 @@ void vector_t::print(){ // esta funcion es solo para hacer pruebas. borrar antes
     cout << "}" << endl;
 }
 
-vector_t vector_t::operator+(vector_t &a){ //hay que pasarlo por referencia o por copia?
+vector_t vector_t::operator+(const vector_t &a){ //hay que pasarlo por referencia o por copia?
 
     int longitud = tam + a.leng();
 
@@ -130,7 +126,7 @@ complejo vector_t::operator[](int pos){
     return p[pos];
 }
 
-bool vector_t::operator==(vector_t &vec){ //hay que pasarlo por referencia o por copia?
+bool vector_t::operator==(const vector_t &vec){ 
 
     if(tam != vec.tam)
     {

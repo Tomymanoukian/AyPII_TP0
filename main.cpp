@@ -55,7 +55,7 @@ int main (int argc, char * const argv[])
 			vec_out = idft(vec_in);
 		}
 
-		*oss << vec_out << endl;
+		*oss << *vec_out << endl;
 
 	}
 	
