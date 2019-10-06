@@ -33,9 +33,7 @@ vector_t::vector_t(vector_t & copia)
 
 vector_t::~vector_t(){
 
-    //cout << "entro a borrar un vector" << endl; //BORRAR
     delete[] p;
-    //cout << "salio de borrar un vector" << endl; //BORRAR
 }
 
 int vector_t::leng() const{
@@ -149,7 +147,10 @@ istream & operator>>(istream &is, vector_t &v){ //lee un vector_t de complejos s
     complejo c;
     string line;
 
-    getline(is, line);
+    if(!getline(is, line)){
+        return is;
+    }
+
     istringstream stream_line(line);
 
     while(stream_line >> c){
@@ -157,12 +158,10 @@ istream & operator>>(istream &is, vector_t &v){ //lee un vector_t de complejos s
     }
 
     //En caso de que haya error, cambia estado de is
-    if(stream_line.bad())
-    {
+    if(stream_line.bad()){
         is.clear(ios::badbit);
-        return is;
     }
-
+    
     return is;
 }
 

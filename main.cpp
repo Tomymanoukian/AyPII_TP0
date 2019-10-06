@@ -45,20 +45,23 @@ int main (int argc, char * const argv[])
 
 	while(!iss->eof()){
 
-		if(iss->eof()){
-			cout << "salio por eof" << endl;
-			break;
-		}
-
 		if(!(*iss >> vec_in)){
-			cout << "salio por error" << endl;
-			break;
+
+			*oss << "El vector que se ha intentado transformar estaba corrupto" << endl; // revisar implementacion de manejo de errores
+
+			iss->clear(ios::goodbit);
+			vec_in.clean();
+			vec_out->clean();
+			
+			continue;
 		}
 
 		vec_out = funcionFourier(vec_in);
 
 		*oss << *vec_out << endl;
-		delete vec_out; //Libero la memoria pedida en DFT
+
+		vec_in.clean();
+		vec_out->clean();
 	}
 	
 
