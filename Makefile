@@ -25,8 +25,7 @@ test_dft.o: test_dft.cpp
 #prueba para borrar:
 prueba: programa $(objects_prog)
 	./programa -i "in_file_prueba.txt"
-	@rm *.o programa
-
+	
 #Prueba de la función DFT
 test-dft: $(objects_dft)
 	g++ -Wall -o test_dft $(objects_dft)

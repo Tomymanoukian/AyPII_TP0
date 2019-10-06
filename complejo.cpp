@@ -6,22 +6,18 @@ using namespace std;
 
 complejo::complejo() : re_(0), im_(0)
 {
-	//cout << "*"; //BORRAR
 }
 
 complejo::complejo(double r) : re_(r), im_(0)
 {
-	//cout << "*"; //BORRAR
 }
 
 complejo::complejo(double r, double i) : re_(r), im_(i)
 {
-	//cout << "*"; //BORRAR
 }
 
 complejo::complejo(complejo const &c) : re_(c.re_), im_(c.im_)
 {
-	//cout << "*"; //BORRAR
 }
 
 complejo const &
@@ -63,7 +59,6 @@ complejo::operator-=(complejo const &c)
 
 complejo::~complejo()
 {
-	//cout << "."; //BORRAR
 }
 
 void complejo::set_re(double x)
@@ -202,15 +197,12 @@ operator>>(istream &is, complejo &c)
 		    && is >> ch
 		    && ch == ')'){
 			good = true;
-			//is.putback(ch);
-			//cout << "complejo 1 ->" << ch << "<-" << "\n"; //BORRAR
 		}
 		else
 			bad = true;
 	}
 	else if (is.good()) {
 		is.putback(ch);
-		//cout << "complejo 2 ->" << ch << "<-" << "\n"; //BORRAR
 		if (is >> re)
 			good = true;
 		else
@@ -221,7 +213,6 @@ operator>>(istream &is, complejo &c)
 		c.re_ = re, c.im_ = im;
 	if (bad){
 		is.clear(ios::badbit);
-		//cout << "falla complejo \n"; //BORRAR
 	}
 
 	return is;
