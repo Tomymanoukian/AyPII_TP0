@@ -1,42 +1,51 @@
 #include <iostream>
 #include <fstream>
+#include <sstream>
     using namespace std;
+#include <string>
 
+#include "main.h"
 #include "vector_t.h"
 #include "complejo.h"
 
-#define MSJ_ERROR "El vector que se ha intentado transformar estaba corrupto"
-#define MAX_DIF 0.00000000000001
-#endif
+#define MAX_DIF 1e-14
+
 
 //compara dos archivos de igual nombre pero diferente extención
 //se debe ingresar solo el nombre del archivo como argumento
 
 int main(int argc, char const *argv[])
 {
-    
-    ifstream file_out((*argv) + ".out");
-    ifstream file_ref((*argv) + ".ref")
+    string name_file = argv[1];
+    cout << name_file << endl;
+
+    ifstream file_out(name_file + ".out");
+    ifstream file_ref(name_file + ".ref");
+
     string line_out;
     string line_ref;
+
     complejo c_out, c_ref;
+    int i = 1;
+    bool good = true;
 
     if(!file_out.is_open() || !file_ref.is_open()){
         cout << "error al abrir los archivos " << endl;
         return 1;
     }
 
-    while(!archivo.eof()){
+    while(!file_out.eof()){
 
         getline(file_out, line_out);
         getline(file_ref, line_ref);
 
-        if(!strcmp(line_out, line_ref)){
+        if(line_out.compare(line_ref)){
 
-            if(strcmp(line_out, MSJ_ERROR) || strcmp(line_ref, MSJ_ERROR)){
+            if(!line_out.compare(MSJ_ERR_VEC_CORRPUTO) || !line_ref.compare(MSJ_ERR_VEC_CORRPUTO)){
 
-                cout << "ERROR:\n" << line_out << "\nEs diferente a:\n" << line_ref << endl;
-                return 1;
+                cout << "ERROR en la linea" << i << "\n" << line_out << "\nEs diferente a:\n" << line_ref << endl;
+                i++;
+                good = false;
             }
 
             istringstream str_line_out(line_out);
@@ -47,14 +56,23 @@ int main(int argc, char const *argv[])
                 if(abs(c_out.re() - c_ref.re()) > MAX_DIF || abs(c_out.im() - c_ref.im()) > MAX_DIF){
 
                     cout << "ERROR:\n" << line_out << "\nEs diferente a:\n" << line_ref << endl;
-                    return 1;
+                    i++;
+                    good = false;
                 }
             }
         }
+    }
+    if(!file_ref.eof()){
+        cout << "ERROR: faltan lineas en el archivo";
+        good = false;
     }
 
     file_out.close();
     file_ref.close();
 
-    return 0;
+    if(good)
+        return 0;
+
+    else
+        return 1;
 }

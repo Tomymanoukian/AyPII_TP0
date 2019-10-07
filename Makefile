@@ -1,5 +1,6 @@
 objects_dft = complejo.o vector_t.o dft.o test_dft.o
 objects_prog = complejo.o vector_t.o dft.o cmdline.o main.o
+objects_diff = complejo.o vector_t.o test_diff.o
 
 programa: $(objects_prog)
 	g++ -Wall -g -o programa $(objects_prog)
@@ -25,9 +26,34 @@ test_dft.o: test_dft.cpp
 test_vector.o : test_vector.cpp
 	g++ -Wall -g -c test_vector.cpp
 
+test_diff.o: test_diff.cpp complejo.h vector_t.h
+	g++ -Wall -g -c test_diff.cpp
+
+#los archivos de prueba se deben llamar test y un numero
+test_programa_dft: programa test_diff.o
+	@set -e;for t in test?; do 					\
+	  ./programa -m "dft" -i $$t.in -o $$t.out;	\
+	done
+
+	g++ -Wall -g -o test_diff $(objects_diff)
+
+	for t in test?; do         			\
+	  echo testing: $$t;                \
+	  ./test_diff $$t;                  \
+	done
+	@echo test ok.
+
+#test_programa_dft: programa test_diff.o
+#	./programa -m "dft" -i "test1.in" -o "test1.out"
+#
+#	g++ -Wall -g -o test_diff $(objects_diff)
+#
+#	./test_diff "test1"
+#	@echo test ok.
+
 #prueba para borrar:
-prueba: programa $(objects_prog)
-	./programa -m "dft" -i "in_file_prueba_dft.txt"
+prueba: programa
+	./programa -m "dft" -i "test1.in" -o "test1.out"
 
 #Prueba de la clase vector_t
 test-vector_t: complejo.o vector_t.o test_vector.o
@@ -58,4 +84,4 @@ test-dft-memory: $(objects_dft)
 	@rm $(objects_dft) test_dft_memory
 
 clean:
-	@rm *.o programa
+	@rm -f *.o programa test_diff

@@ -7,6 +7,7 @@
 #include <cmath>
 #include <iomanip>
 
+#include "main.h"
 #include "cmdline.h"
 #include "complejo.h"
 #include "vector_t.h"
@@ -47,7 +48,7 @@ int main (int argc, char * const argv[])
 
 		if(!(*iss >> vec_in)){
 
-			*oss << "El vector que se ha intentado transformar estaba corrupto" << endl; // revisar implementacion de manejo de errores
+			*oss << MSJ_ERR_VEC_CORRPUTO << endl; // revisar implementacion de manejo de errores
 
 			iss->clear(ios::goodbit);
 			vec_in.clean();
