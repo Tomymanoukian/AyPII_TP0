@@ -1,4 +1,5 @@
 #include "cmdline.h"
+#include "commands_MSG.h"
 
 using namespace std;
 
@@ -21,7 +22,7 @@ void cmdline::parse(int argc, char * const argv[])
 	{
 		if (argv[i][0] != '-') 
 		{
-			cerr << "Invalid non-option argument: "
+			cerr << ARGUMENTO_INVALIDO
 			     << argv[i]
 			     << endl;
 			exit(1);
@@ -42,10 +43,10 @@ void cmdline::parse(int argc, char * const argv[])
 		if (op->flags & OPT_SEEN)
 			continue;
 		if (op->flags & OPT_MANDATORY) {
-			cerr << "Option "
+			cerr << "Opcion obligatoria "
 			     << "-"
 			     << OPTION_NAME(op)
-			     << " is mandatory."
+			     << " no ingresada."
 			     << "\n";
 			exit(1);
 		}
@@ -65,7 +66,7 @@ int cmdline::do_long_opt(const char *opt, const char *arg)
 			if (op->has_arg) {
 
 				if (arg == 0) {
-					cerr << "Option requires argument: "
+					cerr << FALTA_ARGUMENTO
 					     << "--"
 					     << opt
 					     << "\n";
@@ -81,7 +82,7 @@ int cmdline::do_long_opt(const char *opt, const char *arg)
 		}
 	}
 
-	cerr << "Unknown option: " << "--" << opt << "." << endl;
+	cerr << OPCION_DESCONOCIDA << "--" << opt << "." << endl;
 	exit(1);
 
 	return -1;
@@ -99,7 +100,7 @@ int cmdline::do_short_opt(const char *opt, const char *arg)
 			if (op->has_arg) {
 
 				if (arg == 0) {
-					cerr << "Option requires argument: "
+					cerr << FALTA_ARGUMENTO
 					     << "-"
 					     << opt
 					     << "\n";
@@ -115,7 +116,7 @@ int cmdline::do_short_opt(const char *opt, const char *arg)
 		}
 	}
 
-	cerr << "Unknown option: "
+	cerr << OPCION_DESCONOCIDA
 	     << "-"
 	     << opt
 	     << "."
@@ -144,7 +145,7 @@ void opt_input(string const &arg)
 	// Verificamos que el stream este OK.
 	//
 	if (!iss->good()) {
-		cerr << "cannot open "
+		cerr << FALLO_ABRIR
 		     << arg
 		     << "."
 		     << endl;
@@ -183,13 +184,13 @@ void opt_method(string const &arg)
 	if(arg.compare(IDFT)==0) {
 		method=METHOD_IDFT;
 	} else if (arg.compare(DFT)!=0 && arg.compare("-")!=0) {
-		cout<<"Non valid argument for -m"<<endl;
+		cout<<METODO_INVALIDO<<endl;
 		exit(1);
 	}
 }
 
 void opt_help(string const &arg)
 {
-	cout << "cmdline -f factor [-i file] [-o file]" << endl;
+	cout << MSJ_AYUDA << endl;
 	exit(0);
 }
