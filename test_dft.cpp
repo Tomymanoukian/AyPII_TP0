@@ -7,33 +7,33 @@
 
 using namespace std;
 
-#define TEST_DFT_FILE_IN "test_dft_in.txt"
-#define TEST_DFT_FILE_OUT "test_dft_out.txt"
 #define TEST_DFT_CHANGE_TO_IDFT "IDFT"
 
-int main()
+int main(int argc, char ** argv)
 {
     ifstream test_file_in;
     ofstream test_file_out;
     string line_readed;
+
+    string nombre_archivo = argv[1];
     vector_t * (*functionToTest)(vector_t &) = dft;
 
     vector_t test_subject;
     vector_t * output_of_ft;
 
-    test_file_in.open(TEST_DFT_FILE_IN);
+    test_file_in.open(nombre_archivo);
     //Compruebo si hubo error al abrir el archivo
     if(!test_file_in)
     {
-        cout << "No se puedo abrir el archivo de prueba: " << TEST_DFT_FILE_IN <<endl;
+        cout << "No se puedo abrir el archivo de prueba: "<< nombre_archivo << endl;
         return 1;
     }
 
-    test_file_out.open(TEST_DFT_FILE_OUT,ofstream::trunc);
+    test_file_out.open("out_" + nombre_archivo,ofstream::trunc);
     //Compruebo si hubo error al abrir el archivo/crear
     if(!test_file_out)
     {
-        cout << "No se pudo abrir/crear el archivo de salida: " << TEST_DFT_FILE_OUT << endl;
+        cout << "No se pudo abrir/crear el archivo de salida: " << "out_" + nombre_archivo << endl;
     }
 
     while(!test_file_in.eof())

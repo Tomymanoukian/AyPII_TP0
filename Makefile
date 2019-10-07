@@ -22,18 +22,32 @@ main.o : main.cpp cmdline.h complejo.h vector_t.h dft.h
 test_dft.o: test_dft.cpp
 	g++ -Wall -g -c test_dft.cpp
 
+test_vector.o : test_vector.cpp
+	g++ -Wall -g -c test_vector.cpp
+
 #prueba para borrar:
 prueba: programa $(objects_prog)
 	./programa -m "dft" -i "in_file_prueba_dft.txt"
+
+#Prueba de la clase vector_t
+test-vector_t: complejo.o vector_t.o test_vector.o
+	g++ -Wall -o test_vector_t complejo.o vector_t.o test_vector.o
+
+#Empieza la ejecución de la prueba y compara los achivos
+	@./test_vector_t test_vector_t.txt
+	@printf "\n-----Prueba de Vector_t-----\n\n"
+	-@diff -T -s -b -w test_vector_t.txt out_test_vector_t.txt
+	@rm complejo.o vector_t.o test_vector.o test_vector_t
+
 
 #Prueba de la función DFT
 test-dft: $(objects_dft)
 	g++ -Wall -o test_dft $(objects_dft)
 
 #Empieza la ejecución de la prueba y compara los archivos
-	@./test_dft 
+	@./test_dft test_dft.txt  
 	@printf "\n-----Prueba de DFT-----\n\n"
-	-@diff -T -s -b -w test_dft_in.txt test_dft_out.txt
+	-@diff -T -s -b -w test_dft.txt out_test_dft.txt
 	@rm $(objects_dft) test_dft
 
 #Prueba de memoria de la función DFT
