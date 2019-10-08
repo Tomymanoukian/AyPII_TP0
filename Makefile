@@ -30,26 +30,31 @@ test_diff.o: test_diff.cpp complejo.h vector_t.h
 	g++ -Wall -g -c test_diff.cpp
 
 #los archivos de prueba se deben llamar test y un numero
-test_programa_dft: programa test_diff.o
-	@set -e;for t in test?; do 					\
-	  ./programa -m "dft" -i $$t.in -o $$t.out;	\
-	done
-
+test_programa_dft: programa test_diff.o 
 	g++ -Wall -g -o test_diff $(objects_diff)
 
-	for t in test?; do         			\
-	  echo testing: $$t;                \
-	  ./test_diff $$t;                  \
+	@set -e; for t in test_dft?; do 					\
+	  ./programa -m "dft" -i $$t -o $$t.out;		\
+	  echo Aplicando DFT a $$t;						\
 	done
-	@echo test ok.
 
-#test_programa_dft: programa test_diff.o
-#	./programa -m "dft" -i "test1.in" -o "test1.out"
-#
-#	g++ -Wall -g -o test_diff $(objects_diff)
-#
-#	./test_diff "test1"
-#	@echo test ok.
+	@set -e; for t in test_dft?; do         					\
+	  echo testing: $$t;                			\
+	  ./test_diff $$t dft;                  		\
+	done
+	@echo TEST_DFT OK.
+
+	@set -e; for t in test_idft?; do 					\
+	  ./programa -m "idft" -i $$t -o $$t.out;	\
+	  echo Aplicando IDFT a $$t.ref;				\
+	done
+
+	@set -e; for t in test_idft?; do         					\
+	  echo testing: $$t;                			\
+	  ./test_diff $$t idft;                  		\
+	done
+	@echo TEST_IDFT OK.
+
 
 #prueba para borrar:
 prueba: programa
@@ -84,4 +89,4 @@ test-dft-memory: $(objects_dft)
 	@rm $(objects_dft) test_dft_memory
 
 clean:
-	@rm -f *.o programa test_diff
+	@rm -f *.o *.out programa test_diff
