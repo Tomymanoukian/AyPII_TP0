@@ -27,16 +27,34 @@ int main(int argc, char const *argv[])
     complejo c_out, c_ref;
     int i = 1;
     bool good = true;
+    bool eof = false;
+    bool falla_lectura = false;
+    bool linea_corrupta;
 
     if(!file_out.is_open() || !file_ref.is_open()){
         cout << "error al abrir los archivos " << endl;
         return 1;
     }
 
-    while(!file_out.eof()){ //agrego file_ref?
+    while(!eof && !falla_lectura){
 
-        if(!getline(file_out, line_out) || !getline(file_ref, line_ref)){ //revisar esta sentencia
-            break;
+        linea_corrupta = false;
+
+        getline(file_out, line_out);
+        getline(file_ref, line_ref);
+
+        if(file_out.eof() || file_ref.eof()){
+
+            eof = true;
+            continue;
+        }
+
+        if(file_out.bad() || file_ref.bad()){
+
+            cout << "Error al leer el los archivos" << endl;
+            falla_lectura = true;
+            good = false;
+            continue;
         }
  
         if(line_out.compare(line_ref)){
@@ -45,6 +63,7 @@ int main(int argc, char const *argv[])
 
                 cout << "ERROR en la linea nº " << i << "\n" << line_out << "\nEs diferente a:\n" << line_ref << "\n" << endl;
                 i++;
+                falla_lectura = true;
                 good = false;
                 continue;
             }
@@ -52,14 +71,14 @@ int main(int argc, char const *argv[])
             istringstream str_line_out(line_out);
             istringstream str_line_ref(line_ref);
 
-            while(str_line_out >> c_out && str_line_ref >> c_ref){
+            while(str_line_out >> c_out && str_line_ref >> c_ref && !linea_corrupta){ //este loop no para bien
 
                 if(abs(c_out.re() - c_ref.re()) > MAX_DIF || abs(c_out.im() - c_ref.im()) > MAX_DIF){
 
                     cout << "ERROR en la linea nº " << i << "\n" << line_out << "\nEs diferente a:\n" << line_ref << "\n" << endl;
                     i++;
+                    linea_corrupta = true;
                     good = false;
-                    continue;
                 }
             }
             /*if(str_line_out >> c_out || str_line_ref >> c_ref){
@@ -72,8 +91,9 @@ int main(int argc, char const *argv[])
         }
         i++;
     }
-    if(!file_ref.eof()){
-        cout << "ERROR: faltan lineas en el archivo";
+
+    if(!falla_lectura && file_out.eof() != file_ref.eof()){
+        cout << "ERROR: faltan lineas en el archivo" << endl;
         good = false;
     }
 

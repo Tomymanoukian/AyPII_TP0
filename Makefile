@@ -33,23 +33,23 @@ test_diff.o: test_diff.cpp complejo.h vector_t.h
 test_programa_dft: programa test_diff.o 
 	g++ -Wall -g -o test_diff $(objects_diff)
 
-	@set -e; for t in test_dft?; do 					\
-	  ./programa -m "dft" -i $$t -o $$t.out;		\
+	@set -e; for t in test_dft?; do 				\
 	  echo Aplicando DFT a $$t;						\
+	  ./programa -m "dft" -i $$t -o $$t.out;		\
 	done
 
-	@set -e; for t in test_dft?; do         					\
+	@set -e; for t in test_dft?; do         		\
 	  echo testing: $$t;                			\
 	  ./test_diff $$t dft;                  		\
 	done
 	@echo TEST_DFT OK.
 
-	@set -e; for t in test_idft?; do 					\
-	  ./programa -m "idft" -i $$t -o $$t.out;	\
-	  echo Aplicando IDFT a $$t.ref;				\
+	@set -e; for t in test_idft?; do 				\
+	  echo Aplicando IDFT a $$t;					\
+	  ./programa -m "idft" -i $$t -o $$t.out;		\
 	done
 
-	@set -e; for t in test_idft?; do         					\
+	@set -e; for t in test_idft?; do         		\
 	  echo testing: $$t;                			\
 	  ./test_diff $$t idft;                  		\
 	done
