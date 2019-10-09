@@ -19,7 +19,7 @@ vector_t::vector_t(size_t largo){
     p = new complejo[capacidad];
 }
 
-vector_t::vector_t(vector_t & copia)
+vector_t::vector_t(const vector_t &copia)
 {
     tam = copia.tam;
     capacidad = copia.capacidad;

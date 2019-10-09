@@ -32,8 +32,8 @@ type_method method;
 int main (int argc, char * const argv[])
 {
 	vector_t vec_in; 
-	vector_t * vec_out;
-	vector_t * (*funcionFourier)(vector_t &);
+	vector_t vec_out;
+	vector_t (*funcionFourier)(vector_t &);
 
 	cmdline cmdl(options);
 	cmdl.parse(argc, argv); // Metodo de parseo de la clase cmdline
@@ -56,17 +56,17 @@ int main (int argc, char * const argv[])
 
 			iss->clear(ios::goodbit); 
 			vec_in.clean();
-			vec_out->clean();
+			vec_out.clean();
 			
 			continue;
 		}
 
 		vec_out = funcionFourier(vec_in);
 
-		*oss << *vec_out << endl;
+		*oss << vec_out << endl;
 
 		vec_in.clean();
-		vec_out->clean();
+		vec_out.clean();
 	}
 	
 

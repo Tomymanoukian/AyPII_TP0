@@ -21,7 +21,7 @@ private:
 public:
     vector_t();
     vector_t(size_t largo);
-    vector_t(vector_t & copia);
+    vector_t(const vector_t &copia);
     ~vector_t();
     
 
