@@ -38,9 +38,12 @@ test_programa_dft: programa test_diff.o
 	  ./programa -m "dft" -i $$t -o $$t.out;		\
 	done
 
+	@echo "\n"
+
 	@set -e; for t in test_dft?; do         		\
-	  echo testing: $$t;                			\
+	  echo Testing: $$t;                			\
 	  ./test_diff $$t dft;                  		\
+	  echo Test ok;									\
 	done
 	@echo "\nTEST_DFT OK.\n"
 
@@ -49,18 +52,32 @@ test_programa_dft: programa test_diff.o
 	  ./programa -m "idft" -i $$t -o $$t.out;		\
 	done
 
+	@echo "\n"
+
 	@set -e; for t in test_idft?; do         		\
-	  echo testing: $$t;                			\
+	  echo Testing: $$t;                			\
 	  ./test_diff $$t idft;                  		\
+	  echo Test ok;									\
 	done
 	@echo "\nTEST_IDFT OK.\n"
 
 	@rm test_diff
 
+#comprueba que no haya fugas de memoria en el programa
+test_programa_valgrind: programa
+	@echo "\n--------INICIA PRUEBA DE MEMORIA--------\n"
 
-#prueba para borrar:
-prueba: programa
-	./programa -m "dft" -i "test1.in" -o "test1.out"
+	@set -e; for t in test_dft?; do 				\
+	  echo "\n" testing: $$t "\n";						\
+	  valgrind --leak-check=full ./programa -m "dft" -i $$t -o $$t.out;		\
+	done
+
+	@set -e; for t in test_idft?; do 				\
+	  echo "\n" testing: $$t "\n";					\
+	  valgrind --leak-check=full ./programa -m "idft" -i $$t -o $$t.out;		\
+	done
+
+	@echo "\n--------PRUEBA DE MEMORIA FINALIZADA--------\n"
 
 #Prueba de la clase vector_t
 test-vector_t: complejo.o vector_t.o test_vector.o
@@ -91,4 +108,4 @@ test-dft-memory: $(objects_dft)
 	@rm $(objects_dft) test_dft_memory
 
 clean:
-	@rm -f *.o *.out programa
+	@rm -f *.o *.out programa test_diff
