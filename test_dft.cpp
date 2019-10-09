@@ -15,11 +15,18 @@ int main(int argc, char ** argv)
     ofstream test_file_out;
     string line_readed;
 
+    if(argc == 1)
+    {
+        cout << "Error , no se ingreso archivo" << endl;
+        return 1;
+    }
+
+
     string nombre_archivo = argv[1];
-    vector_t * (*functionToTest)(vector_t &) = dft;
+    vector_t (*functionToTest)(vector_t &) = dft;
 
     vector_t test_subject;
-    vector_t * output_of_ft;
+    vector_t output_of_ft;
 
     test_file_in.open(nombre_archivo);
     //Compruebo si hubo error al abrir el archivo
@@ -71,9 +78,9 @@ int main(int argc, char ** argv)
         
         //Imprime imprimo el resultado si funciona
         output_of_ft = functionToTest(test_subject);
-        test_file_out <<  *output_of_ft << endl;
+        test_file_out <<  output_of_ft << endl;
 
-        delete output_of_ft;  //Libero la memoria llamada desde dft
+        output_of_ft.clean(); //Limpio el vector
         test_subject.clean(); //Limpio el vector
         line_readed.clear(); //Limpio el string
     }

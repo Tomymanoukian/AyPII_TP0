@@ -167,7 +167,7 @@ istream & operator>>(istream &is, vector_t &v){ //lee un vector_t de complejos s
 
 ostream & operator<<(ostream &os, vector_t &v){
 
-    for (size_t i = 0; i < (size_t)v.leng(); i++)
+    for (size_t i = 0; i < (size_t)v.tam; i++)
     {
         os << v.valor(i) << " ";
     }

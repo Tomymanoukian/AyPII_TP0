@@ -87,7 +87,7 @@ test-dft: $(objects_dft)
 test-dft-memory: $(objects_dft)
 	g++ -Wall -o test_dft_memory $(objects_dft)
 	@printf "\n-----Prueba de memoria del DFT-----\n\n"
-	@valgrind --leak-check=yes ./test_dft_memory
+	@valgrind --leak-check=yes ./test_dft_memory test_dft.txt
 	@rm $(objects_dft) test_dft_memory
 
 clean:
