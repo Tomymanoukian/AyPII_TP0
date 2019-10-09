@@ -31,7 +31,7 @@ test_diff.o: test_diff.cpp complejo.h vector_t.h
 
 #los archivos de prueba se deben llamar test y un numero
 test_programa_dft: programa test_diff.o 
-	g++ -Wall -g -o test_diff $(objects_diff)
+	@g++ -Wall -g -o test_diff $(objects_diff)
 
 	@set -e; for t in test_dft?; do 				\
 	  echo Aplicando DFT a $$t;						\
@@ -42,7 +42,7 @@ test_programa_dft: programa test_diff.o
 	  echo testing: $$t;                			\
 	  ./test_diff $$t dft;                  		\
 	done
-	@echo TEST_DFT OK.
+	@echo "\nTEST_DFT OK.\n"
 
 	@set -e; for t in test_idft?; do 				\
 	  echo Aplicando IDFT a $$t;					\
@@ -53,7 +53,9 @@ test_programa_dft: programa test_diff.o
 	  echo testing: $$t;                			\
 	  ./test_diff $$t idft;                  		\
 	done
-	@echo TEST_IDFT OK.
+	@echo "\nTEST_IDFT OK.\n"
+
+	@rm test_diff
 
 
 #prueba para borrar:
@@ -89,4 +91,4 @@ test-dft-memory: $(objects_dft)
 	@rm $(objects_dft) test_dft_memory
 
 clean:
-	@rm -f *.o *.out programa test_diff
+	@rm -f *.o *.out programa

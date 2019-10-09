@@ -50,7 +50,11 @@ int main (int argc, char * const argv[])
 
 			*oss << MSJ_ERR_VEC_CORRPUTO << endl; // revisar implementacion de manejo de errores
 
-			iss->clear(ios::goodbit);
+			if(iss -> eof()){
+				break;
+			}
+
+			iss->clear(ios::goodbit); 
 			vec_in.clean();
 			vec_out->clean();
 			
