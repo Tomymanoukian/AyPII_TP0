@@ -81,13 +81,6 @@ int main(int argc, char const *argv[])
                     good = false;
                 }
             }
-            /*if(str_line_out >> c_out || str_line_ref >> c_ref){
-                cout << "ERROR en la linea nº " << i << "\n" << line_out << "\nEs diferente a:\n" << line_ref << "\n" << endl;
-                i++;
-                good = false;
-            }
-            if(str_line_out >> c_out) cout <<"hola 1 linea: " << i << endl;
-            if(str_line_ref >> c_ref) cout <<"hola 2 linea: " << i << endl;*/
         }
         i++;
     }

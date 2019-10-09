@@ -48,7 +48,7 @@ int main (int argc, char * const argv[])
 
 		if(!(*iss >> vec_in)){
 
-			*oss << MSJ_ERR_VEC_CORRPUTO << endl; // revisar implementacion de manejo de errores
+			*oss << MSJ_ERR_VEC_CORRPUTO << endl;
 
 			if(iss -> eof()){
 				break;

@@ -53,12 +53,6 @@ void vector_t::aumentar_cap(size_t cant){
     p = aux;
 }
 
-
-complejo vector_t::valor(int pos) const { //debe fallar si la posicion no es valida
-
-    return p[pos];
-}
-
 void vector_t::append(complejo &valor)
 {
     if(tam == capacidad){
@@ -91,18 +85,7 @@ void vector_t::clean()
     p = new complejo[capacidad];
 }
 
-void vector_t::print() const{ // esta funcion es solo para hacer pruebas. borrar antes de la entrega
-
-    cout << "{";
-
-    for(size_t i = 0; i < (size_t)tam; i++){
-        cout << p[i] << ", ";
-    }
-
-    cout << "}" << endl;
-}
-
-vector_t vector_t::operator +(const vector_t &a){ //hay que pasarlo por referencia o por copia?
+vector_t vector_t::operator +(const vector_t &a){
 
     size_t longitud = tam + a.leng();
 
@@ -146,7 +129,7 @@ bool vector_t::operator ==(const vector_t &vec){
 
     for(size_t i = 0; i < tam;i++)
     {
-        if(!(p[i] == vec.p[i])) //agregar != a complejo
+        if(!(p[i] == vec.p[i]))
         {
             return false;
         }
@@ -182,7 +165,7 @@ ostream & operator <<(ostream &os, vector_t &v){
 
     for (size_t i = 0; i < v.tam; i++)
     {
-        os << v.valor(i) << " ";
+        os << v[i] << " ";
     }
 
     return os;

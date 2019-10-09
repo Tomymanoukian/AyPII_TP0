@@ -26,12 +26,9 @@ public:
     
 
     size_t leng() const; //Devuelve el tamaño del vector
-    complejo valor(int pos) const; //Devuelve el complejo en la posiscion fijada
     void append(complejo &valor); //Agrega el complejo al final del vector
     bool swap(complejo &val, int pos); //Cambia el valor del complejo en la posición seleccionada
     void clean(); //Limpia el vector y lo devuelve a la capacidad default;
-    
-    void print() const;
 
     vector_t operator+(const vector_t &a);
     complejo operator[](int pos);
