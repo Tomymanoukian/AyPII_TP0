@@ -19,14 +19,13 @@ vector_t::vector_t(size_t largo){
     p = new complejo[capacidad];
 }
 
-vector_t::vector_t(const vector_t &copia)
-{
+vector_t::vector_t(const vector_t &copia){
     tam = copia.tam;
     capacidad = copia.capacidad;
 
     p = new complejo[capacidad];
-    for(size_t i = 0; i < capacidad; i++)
-    {
+
+    for(size_t i = 0; i < capacidad; i++){
         p[i] = copia.p[i];
     }
 }
@@ -36,7 +35,7 @@ vector_t::~vector_t(){
     delete[] p;
 }
 
-int vector_t::leng() const{
+size_t vector_t::leng() const{
 
     return tam;
 }
@@ -62,8 +61,7 @@ complejo vector_t::valor(int pos) const { //debe fallar si la posicion no es val
 
 void vector_t::append(complejo &valor)
 {
-    if(tam == capacidad)
-    {
+    if(tam == capacidad){
         aumentar_cap(VECTOR_DEFAULT_STEP);
     }
 
@@ -104,7 +102,7 @@ void vector_t::print() const{ // esta funcion es solo para hacer pruebas. borrar
     cout << "}" << endl;
 }
 
-vector_t vector_t::operator+(const vector_t &a){ //hay que pasarlo por referencia o por copia?
+vector_t vector_t::operator +(const vector_t &a){ //hay que pasarlo por referencia o por copia?
 
     size_t longitud = tam + a.leng();
 
@@ -120,11 +118,25 @@ vector_t vector_t::operator+(const vector_t &a){ //hay que pasarlo por referenci
     return *this;
 }
 
-complejo vector_t::operator[](int pos){
+vector_t& vector_t::operator = (const vector_t &vec){
+
+    tam = vec.tam;
+    capacidad = vec.capacidad;
+
+    p = new complejo[capacidad];
+
+    for(size_t i = 0; i < capacidad; i++){
+        p[i] = vec.p[i];
+    }
+
+    return *this;
+}
+
+complejo vector_t::operator [](int pos){
     return p[pos];
 }
 
-bool vector_t::operator==(const vector_t &vec){ 
+bool vector_t::operator ==(const vector_t &vec){ 
 
     if(tam != vec.tam)
     {
@@ -142,7 +154,7 @@ bool vector_t::operator==(const vector_t &vec){
     return true;
 }
 
-istream & operator>>(istream &is, vector_t &v){ //lee un vector_t de complejos separados por espacios del archivo is
+istream & operator >>(istream &is, vector_t &v){ //lee un vector_t de complejos separados por espacios del archivo is
 
     complejo c;
     string line;
@@ -165,9 +177,9 @@ istream & operator>>(istream &is, vector_t &v){ //lee un vector_t de complejos s
     return is;
 }
 
-ostream & operator<<(ostream &os, vector_t &v){
+ostream & operator <<(ostream &os, vector_t &v){
 
-    for (size_t i = 0; i < (size_t)v.tam; i++)
+    for (size_t i = 0; i < v.tam; i++)
     {
         os << v.valor(i) << " ";
     }

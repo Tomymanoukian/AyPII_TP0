@@ -25,7 +25,7 @@ public:
     ~vector_t();
     
 
-    int leng() const; //Devuelve el tamaño del vector
+    size_t leng() const; //Devuelve el tamaño del vector
     complejo valor(int pos) const; //Devuelve el complejo en la posiscion fijada
     void append(complejo &valor); //Agrega el complejo al final del vector
     bool swap(complejo &val, int pos); //Cambia el valor del complejo en la posición seleccionada
@@ -35,6 +35,7 @@ public:
 
     vector_t operator+(const vector_t &a);
     complejo operator[](int pos);
+    vector_t& operator = (const vector_t &vec);
     bool operator==(const vector_t &vec);
 
     friend istream & operator>>(istream &is, vector_t &v);
