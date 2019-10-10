@@ -4,7 +4,6 @@
     using namespace std;
 #include <string>
 
-#include "main.h"
 #include "vector_t.h"
 #include "complejo.h"
 
@@ -59,21 +58,13 @@ int main(int argc, char const *argv[])
  
         if(line_out.compare(line_ref)){
 
-            if(!line_out.compare(MSJ_ERR_VEC_CORRPUTO) || !line_ref.compare(MSJ_ERR_VEC_CORRPUTO)){
-
-                cout << "ERROR en la linea nº " << i << "\n" << line_out << "\nEs diferente a:\n" << line_ref << "\n" << endl;
-                i++;
-                falla_lectura = true;
-                good = false;
-                continue;
-            }
-
             istringstream str_line_out(line_out);
             istringstream str_line_ref(line_ref);
 
-            while(str_line_out >> c_out && str_line_ref >> c_ref && !linea_corrupta){ //este loop no para bien
+            while(str_line_out >> c_out && str_line_ref >> c_ref && !linea_corrupta){
 
-                if(abs(c_out.re() - c_ref.re()) > MAX_DIF || abs(c_out.im() - c_ref.im()) > MAX_DIF){
+                if(abs(c_out.re() - c_ref.re()) > MAX_DIF || abs(c_out.im() - c_ref.im()) > MAX_DIF){ 
+                //compara los complejos con cierta tolerancia
 
                     cout << "ERROR en la linea nº " << i << "\n" << line_out << "\nEs diferente a:\n" << line_ref << "\n" << endl;
                     i++;

@@ -7,11 +7,14 @@
 #include <cmath>
 #include <iomanip>
 
-#include "main.h"
 #include "cmdline.h"
 #include "complejo.h"
 #include "vector_t.h"
 #include "dft.h"
+
+
+#define MSJ_ERR_VEC_CORRPUTO_1 "El vector de la línea "
+#define MSJ_ERR_VEC_CORRPUTO_2 " se encuentra corrupto, es imposible transformar"
 
 using namespace std;
 
@@ -34,6 +37,7 @@ int main (int argc, char * const argv[])
 	vector_t vec_in; 
 	vector_t vec_out;
 	vector_t (*funcionFourier)(vector_t &);
+    size_t num_linea = 1;
 
 	cmdline cmdl(options);
 	cmdl.parse(argc, argv); // Metodo de parseo de la clase cmdline
@@ -52,7 +56,11 @@ int main (int argc, char * const argv[])
 				break;
 			}
 
-			*oss << MSJ_ERR_VEC_CORRPUTO << endl;
+            if(oss != &cout){
+                *oss << endl;
+            }
+
+			cout << MSJ_ERR_VEC_CORRPUTO_1 << num_linea << MSJ_ERR_VEC_CORRPUTO_2 << endl;
 
 			iss->clear(ios::goodbit); 
 			vec_in.clean();

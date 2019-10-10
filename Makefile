@@ -49,6 +49,8 @@ test_programa_dft: programa test_diff.o
 	  echo Test ok;									\
 	done
 
+	@rm *.out
+
 	@echo "\nProbando dft con argumento -m: "
 	@set -e; for t in test_dft?; do 				\
 	  echo Aplicando DFT a $$t;						\
@@ -79,7 +81,7 @@ test_programa_dft: programa test_diff.o
 	done
 	@echo "\nTEST_IDFT OK.\n"
 
-	@rm test_diff
+	@rm *.out test_diff
 
 #comprueba que no haya fugas de memoria en el programa
 test_programa_valgrind: programa
