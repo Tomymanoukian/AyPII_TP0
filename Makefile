@@ -117,22 +117,3 @@ test-vector_t-memory: complejo.o vector_t.o test_vector.o
 	@valgrind --leak-check=yes ./test-vector_t-memory test_vector_t.txt
 	@rm complejo.o vector_t.o test_vector.o test-vector_t-memory
 
-#Prueba de la función DFT
-test-dft: $(objects_dft)
-	g++ -Wall -o test_dft $(objects_dft)
-
-#Empieza la ejecución de la prueba y compara los archivos
-	@./test_dft test_dft.txt  
-	@printf "\n-----Prueba de DFT-----\n\n"
-	-@diff -T -s -b -w test_dft.txt out_test_dft.txt
-	@rm $(objects_dft) test_dft
-
-#Prueba de memoria de la función DFT
-test-dft-memory: $(objects_dft)
-	g++ -Wall -o test_dft_memory $(objects_dft)
-	@printf "\n-----Prueba de memoria del DFT-----\n\n"
-	@valgrind --leak-check=yes ./test_dft_memory test_dft.txt
-	@rm $(objects_dft) test_dft_memory
-
-clean:
-	@rm -f *.o *.out programa test_diff
