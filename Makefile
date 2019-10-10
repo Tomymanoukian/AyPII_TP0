@@ -97,6 +97,10 @@ test_programa_valgrind: programa
 	  valgrind --leak-check=full ./programa -m "idft" -i $$t -o $$t.out;		\
 	done
 
+	@echo "\n" testing: argumento "--help" "\n"
+
+	@set -e; valgrind --leak-check=full ./programa -h;
+
 	@rm *.out
 
 	@echo "\n--------PRUEBA DE MEMORIA FINALIZADA--------\n"
@@ -117,3 +121,5 @@ test-vector_t-memory: complejo.o vector_t.o test_vector.o
 	@valgrind --leak-check=yes ./test-vector_t-memory test_vector_t.txt
 	@rm complejo.o vector_t.o test_vector.o test-vector_t-memory
 
+clean:
+	@rm -f *o *.out programa test_diff

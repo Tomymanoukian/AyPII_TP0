@@ -34,13 +34,13 @@ type_method method;
 
 int main (int argc, char * const argv[])
 {
-	vector_t vec_in; 
-	vector_t vec_out;
-	vector_t (*funcionFourier)(vector_t &);
-    size_t num_linea = 1;
-
 	cmdline cmdl(options);
 	cmdl.parse(argc, argv); // Metodo de parseo de la clase cmdline
+
+    vector_t vec_in; 
+    vector_t vec_out;
+    vector_t (*funcionFourier)(vector_t &);
+    size_t num_linea = 1;
 
 	//Selecciona cual es el metodo a usar
 	if(method == METHOD_DFT)
@@ -65,6 +65,7 @@ int main (int argc, char * const argv[])
 			iss->clear(ios::goodbit); 
 			vec_in.clean();
 			vec_out.clean();
+            num_linea++;
 			
 			continue;
 		}
@@ -75,6 +76,7 @@ int main (int argc, char * const argv[])
 
 		vec_in.clean();
 		vec_out.clean();
+        num_linea++;
 	}
 	
 
