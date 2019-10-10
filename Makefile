@@ -33,6 +33,23 @@ test_diff.o: test_diff.cpp complejo.h vector_t.h
 test_programa_dft: programa test_diff.o 
 	@g++ -Wall -g -o test_diff $(objects_diff)
 
+	@echo "\n--------INICIA PRUEBA DE PROGRAMA--------\n"
+
+	@echo "Probando dft sin argumento -m: "
+	@set -e; for t in test_dft?; do 				\
+	  echo Aplicando DFT a $$t;						\
+	  ./programa -i $$t -o $$t.out;					\
+	done
+
+	@echo "\n"
+
+	@set -e; for t in test_dft?; do         		\
+	  echo Testing: $$t;                			\
+	  ./test_diff $$t dft;                  		\
+	  echo Test ok;									\
+	done
+
+	@echo "\nProbando dft con argumento -m: "
 	@set -e; for t in test_dft?; do 				\
 	  echo Aplicando DFT a $$t;						\
 	  ./programa -m "dft" -i $$t -o $$t.out;		\
@@ -47,6 +64,7 @@ test_programa_dft: programa test_diff.o
 	done
 	@echo "\nTEST_DFT OK.\n"
 
+	@echo "Probando idft:"
 	@set -e; for t in test_idft?; do 				\
 	  echo Aplicando IDFT a $$t;					\
 	  ./programa -m "idft" -i $$t -o $$t.out;		\

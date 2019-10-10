@@ -48,11 +48,11 @@ int main (int argc, char * const argv[])
 
 		if(!(*iss >> vec_in)){
 
-			*oss << MSJ_ERR_VEC_CORRPUTO << endl;
-
 			if(iss -> eof()){
 				break;
 			}
+
+			*oss << MSJ_ERR_VEC_CORRPUTO << endl;
 
 			iss->clear(ios::goodbit); 
 			vec_in.clean();
