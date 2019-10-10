@@ -12,6 +12,7 @@
 
 //compara dos archivos de igual nombre pero diferente extención
 //se debe ingresar solo el nombre del archivo como argumento
+//Este programa da por sentado que los archvios de referencia están bien escritos. si esto no es así podria fallar
 
 int main(int argc, char const *argv[])
 {
@@ -58,6 +59,13 @@ int main(int argc, char const *argv[])
  
         if(line_out.compare(line_ref)){
 
+            if(line_out.empty() || line_ref.empty()){
+                cout << "ERROR en la linea nº " << i << "\n" << line_out << "\nEs diferente a:\n" << line_ref << "\n" << endl;
+                    good = false;
+                    i++;
+                    continue;
+            }
+
             istringstream str_line_out(line_out);
             istringstream str_line_ref(line_ref);
 
@@ -67,7 +75,6 @@ int main(int argc, char const *argv[])
                 //compara los complejos con cierta tolerancia
 
                     cout << "ERROR en la linea nº " << i << "\n" << line_out << "\nEs diferente a:\n" << line_ref << "\n" << endl;
-                    i++;
                     linea_corrupta = true;
                     good = false;
                 }
