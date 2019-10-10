@@ -97,6 +97,8 @@ test_programa_valgrind: programa
 	  valgrind --leak-check=full ./programa -m "idft" -i $$t -o $$t.out;		\
 	done
 
+	@rm *.out
+
 	@echo "\n--------PRUEBA DE MEMORIA FINALIZADA--------\n"
 
 #Prueba de la clase vector_t
