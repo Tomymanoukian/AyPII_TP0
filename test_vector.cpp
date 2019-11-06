@@ -92,8 +92,8 @@ int main(int argc, char ** argv)
 
 void OperacionSuma(ofstream & out, string line){return;}
 
-void OperacionIO(ofstream & out, string line)
-{   
+void OperacionIO(ofstream & out, string line){
+
     vector_t vector_prueba;
     string print_line = line.substr(0, line.find_last_of("="));
     stringstream string_buffer(print_line);
@@ -111,8 +111,8 @@ void OperacionIO(ofstream & out, string line)
     return;
 }
 
-void OperacionLargo(ofstream & out, string line)
-{
+void OperacionLargo(ofstream & out, string line){
+
     vector_t vector_prueba;
     string print_line = line.substr(0, line.find_last_of("="));
     stringstream string_buffer(print_line);
@@ -130,8 +130,8 @@ void OperacionLargo(ofstream & out, string line)
     return;
 }
 
-void OperacionIgualdad(ofstream & out, string line)
-{
+void OperacionIgualdad(ofstream & out, string line){
+    
     vector_t vector_izquierdo, vector_derecho;
     string print_line = line.substr(0, line.find_last_of("="));
     string line_after_operator = print_line.substr(print_line.find_first_of("=") + 1);
