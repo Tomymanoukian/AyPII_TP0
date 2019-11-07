@@ -1,11 +1,12 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-    using namespace std;
 #include <string>
 
 #include "vector_t.h"
 #include "complejo.h"
+
+using namespace std;
 
 #define MAX_DIF 1e-14
 
